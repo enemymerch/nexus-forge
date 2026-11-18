@@ -1,0 +1,22 @@
+{
+  "name": "Category workspace UI",
+  "project_type": "frontend",
+  "goal": "Implement CategoryPage using the supplied API-CONTRACT.md, typed api.ts and React Query. Keep the page under 6000 characters. Tester writes four focused interaction tests.",
+  "read_files": [
+    "frontend/API-CONTRACT.md",
+    "frontend/src/features/categories/api.ts",
+    "services/taxonomy/src/main/kotlin/com/nexus/taxonomy/web/controller/CategoryController.kt",
+    "services/taxonomy/src/main/kotlin/com/nexus/taxonomy/web/dto/CategoryDtos.kt"
+  ],
+  "write_files": ["frontend/src/features/categories/CategoryPage.tsx", "frontend/src/features/categories/CategoryPage.test.tsx"],
+  "acceptance_criteria": [
+    "Lookup by Category code with Find category shows returned name/path/depth and calls getCategory with trimmed code.",
+    "Lookup errors show actual error.message in role=alert; requests have pending feedback and disabled actions.",
+    "Creation labels New category code, New category name, New parent code send trimmed code/name and parentCode:null for blank parent through createCategory.",
+    "After loading, Category name and Parent code allow Save changes through updateCategory(code,{name,parentCode,updateParent:true}); code stays immutable and blank parent becomes null.",
+    "Blank required inputs prevent requests. Heading Categories, success feedback, no list/delete endpoints. Tests use renderPage, mock ./api and await interactions."
+  ],
+  "gradle_task": "frontend",
+  "test_filter": "frontend/src/features/categories/CategoryPage.test.tsx",
+  "max_attempts": 3
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Validate variant option codes",
+  "goal": "Add invariant validation to com.nexus.catalog.domain.model.VariantOption. Reject blank attributeCode or attributeValueCode, including empty and whitespace-only strings, using IllegalArgumentException. Preserve nonblank values exactly. Add focused JUnit 5 tests for valid values and for empty and whitespace-only input in each field.",
+  "read_files": [
+    "services/catalog/src/main/kotlin/com/nexus/catalog/domain/model/VariantOption.kt",
+    "services/catalog/build.gradle.kts",
+    "build.gradle.kts"
+  ],
+  "write_files": [
+    "services/catalog/src/main/kotlin/com/nexus/catalog/domain/model/VariantOption.kt",
+    "services/catalog/src/test/kotlin/com/nexus/catalog/domain/model/VariantOptionTest.kt"
+  ],
+  "acceptance_criteria": [
+    "A JUnit test constructs VariantOption(\"code\", \"value\") and asserts both property values with assertEquals.",
+    "A separate JUnit test constructs VariantOption(\" code \", \" value \") and asserts the surrounding spaces remain exactly unchanged in BOTH properties.",
+    "A JUnit test asserts IllegalArgumentException for empty attributeCode, with valid attributeValueCode.",
+    "A JUnit test asserts IllegalArgumentException for whitespace-only attributeCode, with valid attributeValueCode.",
+    "A JUnit test asserts IllegalArgumentException for empty attributeValueCode, with valid attributeCode.",
+    "A JUnit test asserts IllegalArgumentException for whitespace-only attributeValueCode, with valid attributeCode."
+  ],
+  "gradle_task": ":services:catalog:test",
+  "test_filter": "com.nexus.catalog.domain.model.VariantOptionTest",
+  "max_attempts": 3
+}

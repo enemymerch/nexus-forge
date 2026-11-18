@@ -1,0 +1,24 @@
+{
+  "name": "Enforce variant code invariants at construction",
+  "goal": "Enforce Variant's existing code invariant during construction. Add init { validateCode(code) } inside the existing Variant class. Preserve its constructor, fields and existing methods. Add concise JUnit 5 regression tests inside VariantTest.",
+  "read_files": [
+    "services/catalog/src/main/kotlin/com/nexus/catalog/domain/model/Variant.kt",
+    "services/catalog/src/main/kotlin/com/nexus/catalog/domain/valueobject/Ids.kt",
+    "services/catalog/build.gradle.kts"
+  ],
+  "write_files": [
+    "services/catalog/src/main/kotlin/com/nexus/catalog/domain/model/Variant.kt",
+    "services/catalog/src/test/kotlin/com/nexus/catalog/domain/model/VariantTest.kt"
+  ],
+  "acceptance_criteria": [
+    "Valid lowercase codes containing digits, underscores and hyphens are stored unchanged.",
+    "Two-character and 64-character codes are valid; one-character and 65-character codes throw IllegalArgumentException.",
+    "Empty and whitespace-only codes throw IllegalArgumentException.",
+    "Uppercase letters, embedded spaces and an at-sign in a code cause IllegalArgumentException.",
+    "Constructor input with surrounding spaces is rejected. The existing normalizeCode method still trims and lowercases explicitly.",
+    "Tests use JUnit 5 and the existing constructor. Keep all tests inside VariantTest and use a private helper to avoid repeated constructor arguments. No Spring context or database is required."
+  ],
+  "gradle_task": ":services:catalog:test",
+  "test_filter": "com.nexus.catalog.domain.model.VariantTest",
+  "max_attempts": 3
+}
