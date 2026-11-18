@@ -3,6 +3,7 @@ target/
 .local-backup/
 .local-tools/
 govener/
+/.idea/
 .env
 .env.*
 *.log
